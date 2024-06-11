@@ -62,7 +62,7 @@ fun Settings(navController: NavController) {
           liveUser.progress = 0f
           liveUser.achievements = 0
           liveUser.toNextLevel = 5f
-          liveUser.lastAchievementOrder = -1
+          liveUser.lastAchievement = Achievement()
         }
 
       }

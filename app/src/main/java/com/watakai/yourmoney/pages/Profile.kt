@@ -82,21 +82,21 @@ fun Profile(
                     Text("Последнее достижение",
                         style = Typography.titleSmall)
                 }
-                if (state.lastAchievementOrder == -1) {
+                if (state.lastAchievement == null) {
 
                 } else {
                     Row(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Text(
-                            state.lastAchievement.name,
+                            state.lastAchievement!!.name,
                             style = Typography.titleSmall
                         )
                     }
                     Row(
                         verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(top = 32.dp)
                     ) {
-                        if (state.lastAchievement.isUnlocked) {
+                        if (state.lastAchievement!!.isUnlocked) {
                             Icon(Icons.Filled.Star, contentDescription = "Some Icon", modifier = Modifier.size(100.dp))
                         }
                         else {

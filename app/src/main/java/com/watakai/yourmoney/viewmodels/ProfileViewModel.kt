@@ -14,8 +14,7 @@ data class ProfileScreenState(
     val progress: Float = 0f,
     val toTheNextLevel: Float = 5f,
     val achievements: Int = 0,
-    val lastAchievementOrder: Int = -1,
-    val lastAchievement: Achievement = Achievement()
+    val lastAchievement: Achievement? = Achievement()
 )
 
 class ProfileViewModel : ViewModel() {
@@ -29,15 +28,17 @@ class ProfileViewModel : ViewModel() {
                     user = db.query<User>().find().first(),
                 )
             }
-            _uiState.update { currentState ->
-                currentState.copy(
-                    lastAchievementOrder = _uiState.value.user.lastAchievementOrder
-                )
-            }
-            if (_uiState.value.user.lastAchievementOrder != -1 ) {
+            if (_uiState.value.user.lastAchievement != null ) {
                 _uiState.update { currentState ->
                     currentState.copy(
-                        lastAchievement = db.query<Achievement>("order == $0", _uiState.value.user.lastAchievementOrder).find().first()
+                        lastAchievement = _uiState.value.user.lastAchievement
+                    )
+                }
+            }
+            else {
+                _uiState.update { currentState ->
+                    currentState.copy(
+                        lastAchievement = null
                     )
                 }
             }

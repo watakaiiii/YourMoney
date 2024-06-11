@@ -12,7 +12,7 @@ class User(): RealmObject {
     var progress: Float = 0f
     var toNextLevel: Float = 5f
     var achievements: Int = 0
-    var lastAchievementOrder: Int = -1
+    var lastAchievement: Achievement? = null
     var expenses: List<Expense> = listOf()
 
     constructor(
@@ -21,7 +21,7 @@ class User(): RealmObject {
         progress: Float,
         toNextLevel: Float,
         achievements: Int,
-        lastAchievementOrder: Int,
+        lastAchievement: Achievement?,
         expenses: List<Expense>
     ) : this() {
         this.username = username
@@ -29,7 +29,7 @@ class User(): RealmObject {
         this.progress = progress
         this.toNextLevel = toNextLevel
         this.achievements = achievements
-        this.lastAchievementOrder = lastAchievementOrder
+        this.lastAchievement = lastAchievement
         this.expenses = expenses
     }
 }

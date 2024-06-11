@@ -54,7 +54,7 @@ class ExpensesViewModel: ViewModel() {
               User().progress,
               User().toNextLevel,
               User().achievements,
-              User().lastAchievementOrder,
+              null,
               _uiState.value.expenses
             )
           )

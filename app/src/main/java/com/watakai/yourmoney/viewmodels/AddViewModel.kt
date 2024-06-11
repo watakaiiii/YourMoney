@@ -66,7 +66,7 @@ class AddViewModel : ViewModel() {
           findLatest(frozenUser)?.let{
             liveUser ->
             liveUser.achievements = liveUser.achievements + 1
-            liveUser.lastAchievementOrder = frozenAchievement.order
+            liveUser.lastAchievement = frozenAchievement
             liveUser.progress = liveUser.progress + 1.5f
 
             if(liveUser.progress >= liveUser.toNextLevel) {
