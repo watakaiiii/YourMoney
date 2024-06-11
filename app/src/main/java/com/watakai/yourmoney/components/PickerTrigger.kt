@@ -1,6 +1,6 @@
 package com.watakai.yourmoney.components
 
-import android.content.res.Configuration.UI_MODE_NIGHT_YES
+
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -11,11 +11,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
+
 import androidx.compose.ui.unit.dp
 import com.watakai.yourmoney.R
 import com.watakai.yourmoney.ui.theme.FillTertiary
-import com.watakai.yourmoney.ui.theme.GoodbyeMoneyTheme
 import com.watakai.yourmoney.ui.theme.Shapes
 import com.watakai.yourmoney.ui.theme.Typography
 
@@ -46,10 +45,3 @@ fun PickerTrigger(
   }
 }
 
-@Preview(showBackground = true, uiMode = UI_MODE_NIGHT_YES)
-@Composable
-fun Preview() {
-  GoodbyeMoneyTheme {
-    PickerTrigger("this week", onClick = {})
-  }
-}

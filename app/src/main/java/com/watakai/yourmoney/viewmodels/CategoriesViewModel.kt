@@ -17,6 +17,7 @@ data class CategoriesState(
   val newCategoryName: String = "",
   val colorPickerShowing: Boolean = false,
   val categoriesCount: Int = 0,
+  val categoiesNames: MutableList<String> = mutableListOf(),
   val categories: List<Category> = listOf()
 )
 
@@ -134,29 +135,34 @@ class CategoriesViewModel : ViewModel() {
 
   fun createNewCategory() {
     viewModelScope.launch(Dispatchers.IO) {
-      db.write {
-        this.copyToRealm(Category(
-          _uiState.value.newCategoryName,
-          _uiState.value.newCategoryColor
-        ))
+      val isDuplicate = _uiState.value.newCategoryName in _uiState.value.categoiesNames
+      if ((_uiState.value.newCategoryName != "") and !(isDuplicate)) {
+        _uiState.value.categoiesNames.add(_uiState.value.newCategoryName)
+        db.write {
+          this.copyToRealm(Category(
+            _uiState.value.newCategoryName,
+            _uiState.value.newCategoryColor
+          ))
+        }
+
+        _uiState.update { currentState ->
+          currentState.copy(
+            categoriesCount = db.query<Category>().find().size
+          )
+        }
+
+
+        updateAchievement(0, _uiState.value.categoriesCount)
+        updateAchievement(2, _uiState.value.categoriesCount)
+
+        _uiState.update { currentState ->
+          currentState.copy(
+            newCategoryColor = Color.White,
+            newCategoryName = ""
+          )
+        }
       }
 
-      _uiState.update { currentState ->
-        currentState.copy(
-          categoriesCount = db.query<Category>().find().size
-        )
-      }
-
-
-      updateAchievement(0, _uiState.value.categoriesCount)
-      updateAchievement(2, _uiState.value.categoriesCount)
-
-      _uiState.update { currentState ->
-        currentState.copy(
-          newCategoryColor = Color.White,
-          newCategoryName = ""
-        )
-      }
     }
   }
 
